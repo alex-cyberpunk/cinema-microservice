@@ -1,4 +1,10 @@
-/** @type {import('jest').Config} */
+/**
+ * For a detailed explanation regarding each configuration property, visit:
+ * https://jestjs.io/docs/configuration
+ */
+
+const { Config } = require('jest');
+
 const config = {
   clearMocks: true,
   collectCoverage: true,
@@ -136,3 +142,4 @@ const config = {
 };
 
 module.exports = config;
+
