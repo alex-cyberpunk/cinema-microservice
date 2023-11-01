@@ -1,2 +1,3 @@
-/movies-services/src/node_modules
-/src/node_modules
+/movies-services/src/node_modules/
+/src/node_modules/
+/cinema-catalog-service/src/node_modules/

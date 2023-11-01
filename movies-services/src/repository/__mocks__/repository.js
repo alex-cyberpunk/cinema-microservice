@@ -3,7 +3,7 @@ const movies = [{
     "titulo": "Os Vingadores Guerra Infinita",
     "sinopse": "Os herois da marvel cacam um gigantao roxo",
     "duracao": 120,
-    "dataLancamento": new Date("2023-10-01T00:00:00Z"),
+    "dataLancamento": new Date("2023-10-11T00:00:00Z"),
     "imagem": "https://th.bing.com/th/id/OIP.C2EPyVTJWziFwvIlb18_LAHaK-?pid=ImgDet&rs=1",
     "categories": [
       "Aventura",

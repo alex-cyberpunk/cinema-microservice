@@ -9,6 +9,8 @@ https://stackoverflow.com/questions/74452866/how-preview-a-html-file-github-code
 
 ![Alt text](image-1.png)
 
+# Movies Services
+
 Comentario:
     Por boa pratica deveria-se copiar os modulso entre os diferentes microservicos. Por exemplo suponha que um microservico use a mesma library que outro , caso um deles preecise de uma alteracao na library pode afetar o outro que nao precisa dessa alteracao. 
 
@@ -46,3 +48,19 @@ Comentario :
     Fazemos isso atraves de **MOCKS**.
     
     **MOCKS** : simulacao de objetos , de dados ... afim de verificar nos testes automatizados.
+
+# Cinema Catolog
+
+![Alt text](image-3.png)
+
+![Alt text](image-4.png)
+
+![Alt text](image-5.png)
+
+O usuario quer ver os filme em cartaz na cidade do user. Tera que ter codigo do pais tambem , tera varios cinemas. Quando tem um dado em que a mudanca nao e tao frequente , esperasse que exista uma copia da info pra cada banco . Quando um dado e mudado com frequencia ai e bom ter comandos de atualziacao nas consultas.
+
+![Alt text](image-8.png)
+![Alt text](image-10.png)
+![Alt text](image-11.png)
+![Alt text](image-12.png)
+![Alt text](image-13.png)

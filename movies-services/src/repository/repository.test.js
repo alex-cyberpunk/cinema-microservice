@@ -30,6 +30,7 @@ test('getMoviesPremieres', async()=>{
     const movies = await repository.getMoviesPremieres();
     expect(Array.isArray(movies)).toBeTruthy();
     expect(movies.length).toBeTruthy();
-    expect(movies.dataLancamento.getTime()).toBeGreaterThanOrEqual(monthAgo.getTime());
+    expect(movies[0].dataLancamento.getTime()).toBeGreaterThanOrEqual(monthAgo.getTime());
+  
     
 })
