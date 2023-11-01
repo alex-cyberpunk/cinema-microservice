@@ -11,7 +11,6 @@ beforeAll(async ()=>{
 
 test('getAllMovies', async()=>{
     const movies = await repository.getAllMovies();
-    console.log(movies)
     expect(Array.isArray(movies)).toBeTruthy();
     expect(movies.length).toBeTruthy();
 
@@ -30,7 +29,43 @@ test('getMoviesPremieres', async()=>{
     const movies = await repository.getMoviesPremieres();
     expect(Array.isArray(movies)).toBeTruthy();
     expect(movies.length).toBeTruthy();
-    expect(movies[0].dataLancamento.getTime()).toBeGreaterThanOrEqual(monthAgo.getTime());
-  
+    expect(movies[0].dataLancamento.getTime()).toBeGreaterThanOrEqual(monthAgo.getTime());  
+})
+
+test('addMovie', async()=>{
+    const movie = {
+        titulo:'Teste Movie',
+        sinopse:'Sim , esse e um teste de filme da pra notar pelo nome ',
+        duracao:69,
+        dataLancamento: new Date(),
+        imagem:'imagem.jpg',
+        categoria:['Aventura']
+    };
+
+    let result;
+
+    try{
+        result = await repository.addMovie(movie);
+        expect(result).toBeTruthy();
+    }
+    finally{
+        console.log(result);
+        await repository.deleteMovie(result._id);
+    }
     
+})
+
+test('deleteMovie', async()=>{
+    const movie = {
+        titulo:'Teste Movie',
+        sinopse:'Sim , esse e um teste de filme da pra notar pelo nome ',
+        duracao:69,
+        dataLancamento: new Date(),
+        imagem:'imagem.jpg',
+        categoria:['Aventura']
+    };
+
+    const result = await repository.addMovie(movie);
+    const result2  = await repository.deleteMovie(result._id);    
+    expect(result2).toBeTruthy();
 })

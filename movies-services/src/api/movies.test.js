@@ -41,3 +41,27 @@ test('GET /movies/premieres 200 OK' ,async()=>{
     expect(Array.isArray(response.body)).toBeTruthy();
     expect(response.body.length).toBeTruthy();
   })
+
+  test('POST /movies/ 201 OK' ,async()=>{
+    const movie = {
+        titulo:'Teste Movie 2',
+        sinopse:'A continuacao q ninguem pediu... ',
+        duracao:120,
+        dataLancamento: new Date(),
+        imagem:'imagem.jpg',
+        categoria:['Aventura']
+    };
+
+    const response = await request(app).
+                            post('/movies/')
+                            .set('Content-Type','application/json')
+                            .send(movie);
+    
+    expect(response.status).toEqual(201);
+    expect(response.body).toBeTruthy();
+  })  
+
+  test('DELETE /movies/:id 204 OK' ,async()=>{
+    const response = await request(app).delete('/movies/1')
+    expect(response.status).toEqual(204);
+  })  

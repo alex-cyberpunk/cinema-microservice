@@ -35,4 +35,13 @@ async function getMoviesPremieres(){
     return [movies[0]];
 }
 
-module.exports = {getAllMovies, getMovieById, getMoviesPremieres}
+async function addMovie(){
+  return movies[0];
+}
+
+async function deleteMovie(id){  
+  if(!id) throw new Error('Nao foi possivel excluir este filme!');
+  return true;
+}
+
+module.exports = {getAllMovies, getMovieById, getMoviesPremieres,deleteMovie,addMovie}
