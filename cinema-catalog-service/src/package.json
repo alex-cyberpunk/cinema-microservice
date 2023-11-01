@@ -4,7 +4,8 @@
   "description": "cinema-catalog-service",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --watch",
+    "start": "node -r dotenv/config index"
   },
   "author": "",
   "license": "ISC",
