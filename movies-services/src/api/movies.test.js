@@ -48,7 +48,7 @@ test('GET /movies/premieres 200 OK' ,async()=>{
         sinopse:'A continuacao q ninguem pediu... ',
         duracao:120,
         dataLancamento: new Date(),
-        imagem:'imagem.jpg',
+        imagem:'htttp://imagem.jpg',
         categoria:['Aventura']
     };
 
@@ -59,9 +59,20 @@ test('GET /movies/premieres 200 OK' ,async()=>{
     
     expect(response.status).toEqual(201);
     expect(response.body).toBeTruthy();
-  })  
+  })
+  
+  test('POST /movies/ 422 UNPROCESSABLE ENTITY' ,async()=>{
+    const movie = {};
 
-  test('DELETE /movies/:id 204 OK' ,async()=>{
+    const response = await request(app).
+                            post('/movies/')
+                            .set('Content-Type','application/json')
+                            .send(movie);
+    
+    expect(response.status).toEqual(422);
+  })
+
+  test('DELETE /movies/:id 204 NO CONTENT' ,async()=>{
     const response = await request(app).delete('/movies/1')
     expect(response.status).toEqual(204);
   })  

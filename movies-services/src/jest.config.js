@@ -10,7 +10,8 @@ const config = {
   collectCoverage: true,
   coverageDirectory: "coverage",
    coveragePathIgnorePatterns: [
-    "/node_modules/" ],
+    "/node_modules/" ,
+    "logger.js"],
   coverageProvider: "v8",
    coverageReporters: [
     "json",

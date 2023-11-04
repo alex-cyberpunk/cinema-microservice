@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">78.04% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>39/39</span>
+                <span class='fraction'>32/41</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">78.04% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>39/39</span>
+                <span class='fraction'>32/41</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -101,7 +101,11 @@
 <a name='L36'></a><a href='#L36'>36</a>
 <a name='L37'></a><a href='#L37'>37</a>
 <a name='L38'></a><a href='#L38'>38</a>
-<a name='L39'></a><a href='#L39'>39</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -123,6 +127,15 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -130,16 +143,9 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">module.exports=(app,repository)=&gt;{
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">const validationMiddleware= require('../middlewares/validationMiddleware.js')
+&nbsp;
+module.exports=(app,repository)=&gt;{
     
     app.get('/movies/premieres',async(req,res,next)=&gt;{
         const movies = await repository.getMoviesPremieres();
@@ -160,16 +166,16 @@
         res.json(movies);
     })
 &nbsp;
-    app.post('/movies',async(req,res,next)=&gt;{
-        const titulo = req.body.titulo;
-        const sinopse = req.body.sinopse;
-        const duracao = parseInt(req.body.duracao);
-        const dataLancamento = new Date(req.body.dataLancamento);
-        const imagem = req.body.imagem;
-        const categoria = req.body.categoria;
-&nbsp;
-        const result = await repository.addMovie({titulo,sinopse,duracao,dataLancamento,imagem,categoria})
-        res.status(201).json(result);
+    app.post('/movies',validationMiddleware.validateMovie,async(req,res,next)=&gt;{
+<span class="cstat-no" title="statement not covered" >        const titulo = req.body.titulo;</span>
+<span class="cstat-no" title="statement not covered" >        const sinopse = req.body.sinopse;</span>
+<span class="cstat-no" title="statement not covered" >        const duracao = parseInt(req.body.duracao);</span>
+<span class="cstat-no" title="statement not covered" >        const dataLancamento = new Date(req.body.dataLancamento);</span>
+<span class="cstat-no" title="statement not covered" >        const imagem = req.body.imagem;</span>
+<span class="cstat-no" title="statement not covered" >        const categoria = req.body.categoria;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        const result = await repository.addMovie({titulo,sinopse,duracao,dataLancamento,imagem,categoria})</span>
+<span class="cstat-no" title="statement not covered" >        res.status(201).json(result);</span>
     })
 &nbsp;
     app.delete('/movies/:id',async(req,res,next)=&gt;{
@@ -184,7 +190,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-01T18:23:43.939Z
+                at 2023-11-03T14:33:47.840Z
             </div>
         <script src="../prettify.js"></script>
         <script>
