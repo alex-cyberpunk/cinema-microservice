@@ -64,3 +64,19 @@ O usuario quer ver os filme em cartaz na cidade do user. Tera que ter codigo do 
 ![Alt text](image-11.png)
 ![Alt text](image-12.png)
 ![Alt text](image-13.png)
+
+
+Qualquer tecnologia que aceite solicitacoes http pode substituir esse modulos**
+
+** API Gateway
+Fornece o ponto de acesso unico a sua arquitetura microservices. Nao importa o q vc tenha , colocando um API Gateway a frente deles voce tera uma URL unica para se preocupar.
+
+O API Gateway gerencia o trafego de requisicoes para microservices de destino.
+![Alt text](image-14.png)
+
+Se a empresa tem mtos microservices , ai e bom separar por mobile, web...
+![Alt text](image-16.png)
+Outro bom lugar e a evolucao de um sistema monolitico.
+![Alt text](image-17.png)
+
+Para pequenos API Gateway o node se encaixa muito bem.
