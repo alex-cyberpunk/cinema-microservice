@@ -32,6 +32,18 @@ async function validateBlacklist(req,res,next){
         next()
 }
 
+
+async function validateLoginSchema(req,res,next){
+    const schema = require('../schema/login')
+    const { error } = schema.validate(req.body);
+    if(error){
+        const { details } = error;
+        return res.status(422).json(details.map(d=>d.message));
+    }
+
+    next();
+}
+
 async function validateToken(req,res,next){
     let token= req.headers['authorization'];
     token = token.replace('Beader','');
@@ -49,12 +61,11 @@ async function validateToken(req,res,next){
 }
 
 async function doLogout(req,res,next){
-    const {userId} = res.locals;
     let token= req.headers['authorization'];
     token = token.replace('Bearer','');
-    
+    console.log("passou por aqui")
     await repository.blacklisToken(token)
     res.sendStatus(200);
 }
 
-module.exports={doLogin,doLogout,validateToken};
+module.exports={doLogin,doLogout,validateToken,validateLoginSchema,validateBlacklist};

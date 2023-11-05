@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 const ADMIN_PROFILE = 1;
 
 function validateMovie(req,res,next){
+    if(!req.body) return sendStatus(422)
     const { error } = schema.validate(req.body);
     if(error){
         const { details } = error;
@@ -18,7 +19,7 @@ async function validateToken(req,res,next){
     let token= req.headers['authorization'];
     token = token.replace('Beader','');
     try{
-        const {userId}=jwt.verify(token,process.env.SECRET)
+        const {userId,profileId}=jwt.verify(token,process.env.SECRET)
         res.locals.userId=userId;
         res.locals.profileId=profileId;
         next();
@@ -40,5 +41,6 @@ function validateAdmin(req,res,next){
 
 module.exports={
     validateMovie,
-    validateToken
+    validateToken,
+    validateAdmin
 }
