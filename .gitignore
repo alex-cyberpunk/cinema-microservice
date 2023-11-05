@@ -1,4 +1,5 @@
 /movies-services/src/node_modules/
 /src/node_modules/
 /cinema-catalog-service/src/node_modules/
-/api-gateway/node_modules/
+/api-gateway/src/node_modules/
+/api-gateway/data/

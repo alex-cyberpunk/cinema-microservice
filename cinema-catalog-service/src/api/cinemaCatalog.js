@@ -1,20 +1,22 @@
+const {validateToken} = require('../middlewares/validationMiddleware')
+
 module.exports=(app,repository)=>{
     
-    app.get('/cities/:cityId/movies',async(req,res,next)=>{
+    app.get('/cities/:cityId/movies',validateToken,async(req,res,next)=>{
         const movies =  await repository.getMoviesByCityId(req.params.cityId);
         if(!movies) return res.sendStatus(404);
         //console.log(req.params.cityId)
         res.json(movies);
     })
 
-    app.get('/cities/:cityId/movies/:movieId',async(req,res,next)=>{
+    app.get('/cities/:cityId/movies/:movieId',validateToken,async(req,res,next)=>{
         const session =  await repository.getMovieSessionByCityId(req.params.movieId,req.params.cityId);
         if(!session) return res.sendStatus(404);
 
         res.json(session);
     })
 
-    app.get('/cities/:cityId/cinemas',async(req,res,next)=>{
+    app.get('/cities/:cityId/cinemas',validateToken,async(req,res,next)=>{
         const cinemas =  await repository.getAllCinemasByCityId(req.params.cityId);
         if(!cinemas) return res.sendStatus(404);
 
