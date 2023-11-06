@@ -4,7 +4,6 @@ const jwt = require('jsonwebtoken')
 const ADMIN_PROFILE = 1;
 
 function validateMovie(req,res,next){
-    if(!req.body) return sendStatus(422)
     const { error } = schema.validate(req.body);
     if(error){
         const { details } = error;
@@ -17,15 +16,19 @@ function validateMovie(req,res,next){
 
 async function validateToken(req,res,next){
     let token= req.headers['authorization'];
-    token = token.replace('Beader','');
+    token = token.replace('Bearer ', '');
+    if(!token) return res.sendStatus(401); 
+    
     try{
+        console.log("o token e")
+        console.log(token)
         const {userId,profileId}=jwt.verify(token,process.env.SECRET)
         res.locals.userId=userId;
         res.locals.profileId=profileId;
         next();
     }
-    catch(error){
-        console.log(error)
+    catch(err){
+        console.log(err)
         res.sendStatus(401);
     }
     

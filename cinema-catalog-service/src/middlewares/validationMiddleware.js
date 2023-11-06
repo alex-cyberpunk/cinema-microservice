@@ -1,4 +1,3 @@
-const schema = require('../schemas/movieSchema.js');
 const jwt = require('jsonwebtoken')
 
 async function validateToken(req,res,next){

@@ -3,8 +3,8 @@ const server = require('../server/server.js');
 const movies = require('./movies')
 const request = require('supertest');
 const repositoryMock = require('../repository/__mocks__/repository.js');
-const { JsonWebTokenError } = require('jsonwebtoken');
-const { error } = require('../../../api-gateway/src/schema/login.js');
+//const { JsonWebTokenError } = require('jsonwebtoken');
+//const { error } = require('../../../api-gateway/src/schema/login.js');
 
 const adminToken = '1';
 const guesToken = '2';
@@ -12,10 +12,9 @@ const guesToken = '2';
 jest.mock('../node_modules/jsonwebtoken',()=>{
   return{
     verify: (token)=>{
-      if(token==='1') return {userId:1,profileId:1}//ADMIN
-      else if(token==='2') return {userId:2,profileId:2}//GUEST
-      else throw  new Error('Invalid token!');
-  
+        if(token === adminToken) return {userId:1,profileId:1}//ADMIN
+        else if(token === guesToken) return {userId:2,profileId:2}//GUEST
+        else throw  new Error('Invalid token!');
     }
   }
   
@@ -24,7 +23,7 @@ jest.mock('../node_modules/jsonwebtoken',()=>{
 let app=null;
 
 beforeAll(async()=>{
-    process.env.PORT=3002;
+    process.env.PORT=3003;
     app = await server.start(movies,repositoryMock);
 });
 
@@ -34,7 +33,7 @@ afterAll(async()=>{
 
 
 test('GET /movies 200 OK' ,async()=>{
-   const response = (await request(app).get('/movies')).set('authorization',`Bearer ${adminToken}`);
+   const response = await request(app).get('/movies').set('authorization',`Bearer ${adminToken}`);
    expect(response.status).toEqual(200);
    expect(Array.isArray(response.body)).toBeTruthy();
    expect(response.body.length).toBeTruthy();
@@ -83,7 +82,8 @@ test('GET /movies/premieres 200 OK' ,async()=>{
     const response = await request(app).
                             post('/movies/')
                             .set('Content-Type','application/json')
-                            .send(movie).set('authorization',`Bearer ${adminToken}`);
+                            .set('authorization',`Bearer ${adminToken}`)
+                            .send(movie);
     
     expect(response.status).toEqual(201);
     expect(response.body).toBeTruthy();

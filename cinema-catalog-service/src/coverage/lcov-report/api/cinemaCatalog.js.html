@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.3% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>42/46</span>
+                <span class='fraction'>36/48</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>10/10</span>
+                <span class='fraction'>6/6</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">91.3% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>42/46</span>
+                <span class='fraction'>36/48</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line high'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -108,20 +108,24 @@
 <a name='L43'></a><a href='#L43'>43</a>
 <a name='L44'></a><a href='#L44'>44</a>
 <a name='L45'></a><a href='#L45'>45</a>
-<a name='L46'></a><a href='#L46'>46</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -153,23 +157,25 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">module.exports=(app,repository)=&gt;{
+<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">const {validateToken} = require('../middlewares/validationMiddleware')
+&nbsp;
+module.exports=(app,repository)=&gt;{
     
-    app.get('/cities/:cityId/movies',async(req,res,next)=&gt;{
-        const movies =  await repository.getMoviesByCityId(req.params.cityId);
-        if(!movies) return res.sendStatus(404);
-        //console.log(req.params.cityId)
-        res.json(movies);
+    app.get('/cities/:cityId/movies',validateToken,async(req,res,next)=&gt;{
+<span class="cstat-no" title="statement not covered" >        const movies =  await repository.getMoviesByCityId(req.params.cityId);</span>
+<span class="cstat-no" title="statement not covered" >        if(!movies) return res.sendStatus(404);</span>
+<span class="cstat-no" title="statement not covered" >        //console.log(req.params.cityId)</span>
+<span class="cstat-no" title="statement not covered" >        res.json(movies);</span>
     })
 &nbsp;
-    app.get('/cities/:cityId/movies/:movieId',async(req,res,next)=&gt;{
-        const session =  await repository.getMovieSessionByCityId(req.params.movieId,req.params.cityId);
-        if(!session) return res.sendStatus(404);
-&nbsp;
-        res.json(session);
+    app.get('/cities/:cityId/movies/:movieId',validateToken,async(req,res,next)=&gt;{
+<span class="cstat-no" title="statement not covered" >        const session =  await repository.getMovieSessionByCityId(req.params.movieId,req.params.cityId);</span>
+<span class="cstat-no" title="statement not covered" >        if(!session) return res.sendStatus(404);</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        res.json(session);</span>
     })
 &nbsp;
-    app.get('/cities/:cityId/cinemas',async(req,res,next)=&gt;{
+    app.get('/cities/:cityId/cinemas',validateToken,async(req,res,next)=&gt;{
 <span class="cstat-no" title="statement not covered" >        const cinemas =  await repository.getAllCinemasByCityId(req.params.cityId);</span>
 <span class="cstat-no" title="statement not covered" >        if(!cinemas) return res.sendStatus(404);</span>
 <span class="cstat-no" title="statement not covered" ></span>
@@ -205,7 +211,7 @@
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-01T14:05:20.474Z
+                at 2023-11-06T05:04:20.544Z
             </div>
         <script src="../prettify.js"></script>
         <script>

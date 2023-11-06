@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.14% </span>
+                <span class="strong">91.78% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>64/71</span>
+                <span class='fraction'>67/73</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">90.14% </span>
+                <span class="strong">91.78% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>64/71</span>
+                <span class='fraction'>67/73</span>
             </div>
         
             
@@ -133,7 +133,9 @@
 <a name='L68'></a><a href='#L68'>68</a>
 <a name='L69'></a><a href='#L69'>69</a>
 <a name='L70'></a><a href='#L70'>70</a>
-<a name='L71'></a><a href='#L71'>71</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">3x</span>
@@ -142,6 +144,7 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -172,6 +175,7 @@
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -194,8 +198,8 @@
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -209,9 +213,10 @@ const repository=require('../repository/repository.js')
 async function doLogin(req,res,next){
     const email = req.body.email;
     const password = req.body.password;
-&nbsp;
+    console.log(email)
     try{
         const user = await repository.getUser(email,password);
+        console.log(user)
         const token = jwt.sign({userId:user._id , profileId: user.profileId},
             process.env.SECRET,
             {expiresIn:parseInt(process.env.EXPIRES)});
@@ -240,6 +245,7 @@ async function validateBlacklist(req,res,next){
 &nbsp;
 async function validateLoginSchema(req,res,next){
     const schema = require('../schema/login')
+    console.log("amigo estou aqui")
     const { error } = schema.validate(req.body);
     if(error){
         const { details } = error;
@@ -252,6 +258,7 @@ async function validateLoginSchema(req,res,next){
 async function validateToken(req,res,next){
     let token= req.headers['authorization'];
     token = token.replace('Beader','');
+    console.log(token);
     try{
         const {userId,profileId}=jwt.verify(token,process.env.SECRET)
         res.locals.userId=userId;
@@ -260,7 +267,7 @@ async function validateToken(req,res,next){
     }
     catch(error){
         console.log(error)
-        res.sendStatus(401);
+        return res.sendStatus(401);
     }
     
 }
@@ -268,9 +275,8 @@ async function validateToken(req,res,next){
 <span class="cstat-no" title="statement not covered" ><span class="fstat-no" title="function not covered" >async function doLogout(req,res,next){</span></span>
 <span class="cstat-no" title="statement not covered" >    let token= req.headers['authorization'];</span>
 <span class="cstat-no" title="statement not covered" >    token = token.replace('Bearer','');</span>
-<span class="cstat-no" title="statement not covered" >    console.log("passou por aqui")</span>
 <span class="cstat-no" title="statement not covered" >    await repository.blacklisToken(token)</span>
-<span class="cstat-no" title="statement not covered" >    res.sendStatus(200);</span>
+<span class="cstat-no" title="statement not covered" >    return res.sendStatus(200);</span>
 <span class="cstat-no" title="statement not covered" >}</span>
 &nbsp;
 module.exports={doLogin,doLogout,validateToken,validateLoginSchema,validateBlacklist};</pre></td></tr></table></pre>
@@ -280,7 +286,7 @@ module.exports={doLogin,doLogout,validateToken,validateLoginSchema,validateBlack
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-05T18:01:02.164Z
+                at 2023-11-06T03:42:27.695Z
             </div>
         <script src="../prettify.js"></script>
         <script>

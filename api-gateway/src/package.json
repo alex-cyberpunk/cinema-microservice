@@ -4,8 +4,8 @@
   "description": "Provide a single endpoint to acess microservices",
   "main": "index.js",
   "scripts": {
-    "start": "node -r dotenv/config /server/index",
-    "dev": "npx nodemon -r dotenv/config index",
+    "start": "node -r dotenv/config server/index.js",
+    "dev": "npx nodemon -r dotenv/config server/index.js",
     "test": "jest"
   },
   "author": "Alex Matias",

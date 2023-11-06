@@ -4,9 +4,10 @@ const repository=require('../repository/repository.js')
 async function doLogin(req,res,next){
     const email = req.body.email;
     const password = req.body.password;
-
+    console.log(email)
     try{
         const user = await repository.getUser(email,password);
+        console.log(user)
         const token = jwt.sign({userId:user._id , profileId: user.profileId},
             process.env.SECRET,
             {expiresIn:parseInt(process.env.EXPIRES)});
@@ -35,6 +36,7 @@ async function validateBlacklist(req,res,next){
 
 async function validateLoginSchema(req,res,next){
     const schema = require('../schema/login')
+    console.log("amigo estou aqui")
     const { error } = schema.validate(req.body);
     if(error){
         const { details } = error;
@@ -47,6 +49,7 @@ async function validateLoginSchema(req,res,next){
 async function validateToken(req,res,next){
     let token= req.headers['authorization'];
     token = token.replace('Beader','');
+    console.log(token);
     try{
         const {userId,profileId}=jwt.verify(token,process.env.SECRET)
         res.locals.userId=userId;
@@ -55,7 +58,7 @@ async function validateToken(req,res,next){
     }
     catch(error){
         console.log(error)
-        res.sendStatus(401);
+        return res.sendStatus(401);
     }
     
 }
@@ -63,9 +66,8 @@ async function validateToken(req,res,next){
 async function doLogout(req,res,next){
     let token= req.headers['authorization'];
     token = token.replace('Bearer','');
-    console.log("passou por aqui")
     await repository.blacklisToken(token)
-    res.sendStatus(200);
+    return res.sendStatus(200);
 }
 
 module.exports={doLogin,doLogout,validateToken,validateLoginSchema,validateBlacklist};
