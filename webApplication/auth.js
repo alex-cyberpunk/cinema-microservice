@@ -35,6 +35,7 @@ module.exports = function (passport) {
         passwordField: 'password'
     },
         (username, password, done) => {
+            //alterar para /login do api-gateway
             try {
                 const user = findUser(username);
 
